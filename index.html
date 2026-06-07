@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+    
+    <!-- 
+    Flujo de trabajo por cada modulo:
+    1) HTML
+    2) JS
+    3) CSS
+
+    Responsive para este proyecto:
+    Hasta sm(575px) es mobil
+
+    1. Menu de navegación:
+    El menú de navegación debe colapsar en un menú tipo hamburguesa únicamente
+    en la versión móvil. En escritorio debe mostrarse de forma expandida. 
+    -->
+<body>
+    <header>
+        <!--Consigna "Menu hamburgesa"-->
+        <!--nav contiene los elementos que estaran en la barra de navegación (gracias al navbar)-->
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <!--button expande la barra de navegación lateral (gracias al toggler)-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--div contiene los elementos que estaran en la barra de navegación lateral (gracias al offcanvas)-->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel">Poke menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!--ul es lista de links de la barra de navegación-->
+                        <ul class="navbar-nav container-fluid d-flex justify-content-center gap-lg-5 gap-md-4 gap-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <h1 class="d-none">Pokemon Web</h1>
+    </header>
+
+    <main>
+        <section id="hero-img">
+            <img src="img/hero.jpg.webp" alt="hero de pokemon" class="img-fluid">
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
