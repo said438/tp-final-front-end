@@ -1,24 +1,33 @@
-import {obtenerNombresPokemons, obtenerUrlImagenesPokemons} from "./api.js";
-import {mostrarPokemons} from "./renderizado.js";
+import {obtenerPokemons} from "./api.js";
+import {mostrarPokemons, actualizarModalPokemon} from "./renderizado.js";
+import {buscarNombresPokemons} from "./busqueda.js";
 
 //Ejecución
 EjecucionPrincipal();
 
 //Funcion principal
 async function EjecucionPrincipal(){
-    const listaNombresPokemons = 
-        Array.from(await obtenerNombresPokemons());
-    const listaUrlsImagenesPokemons = 
-        Array.from(await obtenerUrlImagenesPokemons(listaNombresPokemons.length));
-
-    console.log("lista de nombres de pokemons: ");
-    console.log(listaNombresPokemons);
-    console.log("lista de imagenes de los pokemons: ");
-    console.log(listaUrlsImagenesPokemons);
-
-    mostrarPokemons(listaNombresPokemons, listaUrlsImagenesPokemons);
+    const pokemons = await obtenerPokemons();
+    mostrarPokemons(pokemons);
 
     //Eventos
-    document.getElementById("input-pokemon")
-        .addEventListener("input", (event) => buscarPokemons(event, listaNombresPokemons));
+    document.getElementById("input-pokemon").addEventListener("input", async (event) => {
+        const nombresPokemons = pokemons.map(pokemon => pokemon.nombre);
+        const textoInput = event.target.value;
+
+        //Si el input esta vacio se termina la ejecución
+        if(textoInput.trim() === ""){return;}
+
+        const nombres = buscarNombresPokemons(nombresPokemons, textoInput);
+        mostrarPokemons(pokemons);
+    });
+
+    document.getElementById("lista-pokemons").addEventListener("click", async (event) => {
+        const tarjetaPokemon = event.target.closest(".card"); 
+        const pokemon = pokemons.filter(pokemon => {
+            return `pokemon-${pokemon.id}` === tarjetaPokemon.id
+        });
+
+        actualizarModalPokemon(pokemon[0]);
+    })
 }

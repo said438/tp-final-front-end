@@ -1,46 +1,32 @@
 //Funciones de API's
-import {mensajeErrorApi} from "./renderizado";
+import {Pokemon} from "./pokemon.js"
+import {mostrarMensajeErrorApi} from "./renderizado.js";
 
-export async function obtenerNombresPokemons(){
-
+export async function obtenerPokemons(){
     try{
-        const respesta = await fetch("https://pokeapi.co/api/v2/pokemon");
-        const resultado = await respesta.json();
-        const nombresPokemon = resultado.results.map(resultado => resultado.name);
-        
-        return nombresPokemon;
+        const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon");
+        const resultado = await respuesta.json();
+
+        const promesas = resultado.results.map(async (pokemon) => {
+            const respuesta = await fetch(pokemon.url);
+            const detallePokemon = await respuesta.json();
+
+            /*Le colocamos al Obj Pokemon los detalles
+            que nos interesan con los datos obtenidos de la Api*/
+            return new Pokemon(
+                detallePokemon.id,
+                detallePokemon.name,
+                detallePokemon.sprites.front_default
+            );
+        });
+
+        const pokemons = Promise.all(promesas);
+
+        //Retornamos los pokemons con sus detalles
+        return pokemons;
     }catch(ex){
-        console.log("Error, no se pudo obtener los nombres de los pokemones de la API");
-        console.log("Descripción del error: " + ex);
-        mensajeErrorApi();
+        console.log("Error al obtener los pokemones");
+        console.log(ex);
+        mostrarMensajeErrorApi();
     }
-}
-
-export async function obtenerUrlImagenesPokemons(){
-    const promesas = [];
-    const cantidadPokemons = await obtenerCantidadPokemons();
-
-    try{
-        for (let index = 0; index < cantidadPokemons; index++) {
-            promesas.push( fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`));
-        }
-
-        const respuestas = await Promise.all(promesas);
-        const pokemons = await Promise.all(respuestas.map(respuesta => respuesta.json()));
-        const urlsImagenes = pokemons.map(pokemon => pokemon.sprites.front_default);
-
-        return urlsImagenes;
-    }catch(ex){
-        console.log("Error, no se pudo obtener las urls de las imagenes de la API");
-        console.log("Descripción del error: " + ex);
-        mensajeErrorApi();
-    }
-}
-
-export async function obtenerCantidadPokemons(){
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    const resultado = await response.json();
-    const cantidadPokemons = resultado.results.length;
-
-    return cantidadPokemons;
 }
