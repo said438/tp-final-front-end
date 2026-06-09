@@ -1,6 +1,6 @@
 import {obtenerPokemons} from "./api.js";
 import {mostrarPokemons, actualizarModalPokemon} from "./renderizado.js";
-import {buscarNombresPokemons} from "./busqueda.js";
+import {buscarPokemons} from "./busqueda.js";
 
 //Ejecución
 EjecucionPrincipal();
@@ -15,11 +15,13 @@ async function EjecucionPrincipal(){
         const nombresPokemons = pokemons.map(pokemon => pokemon.nombre);
         const textoInput = event.target.value;
 
-        //Si el input esta vacio se termina la ejecución
-        if(textoInput.trim() === ""){return;}
+        //Si el input esta vacio muestra todos los pokemons y termina la ejecución
+        if(textoInput.trim() === ""){
+            mostrarPokemons(pokemons);
+            return;
+        }
 
-        const nombres = buscarNombresPokemons(nombresPokemons, textoInput);
-        mostrarPokemons(pokemons);
+        mostrarPokemons(buscarPokemons(pokemons, textoInput));
     });
 
     document.getElementById("lista-pokemons").addEventListener("click", async (event) => {
