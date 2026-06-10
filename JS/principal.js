@@ -25,6 +25,7 @@ async function EjecucionPrincipal(){
     });
 
     document.getElementById("lista-pokemons").addEventListener("click", async (event) => {
+
         const tarjetaPokemon = event.target.closest(".card"); 
         const pokemon = pokemons.filter(pokemon => {
             return `pokemon-${pokemon.id}` === tarjetaPokemon.id

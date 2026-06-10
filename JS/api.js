@@ -16,12 +16,17 @@ export async function obtenerPokemons(){
             return new Pokemon(
                 detallePokemon.id,
                 detallePokemon.name,
+                detallePokemon.height,
+                detallePokemon.weight,
+                detallePokemon.types[0].type.name,
                 detallePokemon.sprites.front_default
             );
         });
 
         const pokemons = Promise.all(promesas);
-
+        console.log("1");
+        console.log(pokemons[0]);
+        
         //Retornamos los pokemons con sus detalles
         return pokemons;
     }catch(ex){

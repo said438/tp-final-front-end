@@ -18,13 +18,20 @@ function generarTarjetaPokemon(pokemon){
             <h5 class="card-title">${pokemon.nombre}</h5>
         </div>
     </li>
-    `
+    `;
 }
 
 export function actualizarModalPokemon(pokemon){
     document.getElementById("modal-titulo").textContent = pokemon.nombre;
     document.getElementById("modal-img").setAttribute("src", pokemon.urlImagen);
-    document.getElementById("modal-img").setAttribute("alt", pokemon.urlImagen);
+    document.getElementById("modal-img").setAttribute("alt", pokemon.nombre);
+    document.querySelector(".modal-body").innerHTML += `
+        <ul>
+            <li>Altura: ${pokemon.height}</li>
+            <li>Peso: ${pokemon.weight}</li>
+            <li>Tipo: ${pokemon.types}</li>
+        </ul>
+    `;
     console.log("Se actualizo el Modal");
 }
 
@@ -33,5 +40,5 @@ export function mostrarMensajeErrorApi(){
     document.body.innerHTML = `
         <p> Hubo un error. No se pudo obtener los datos de la API. </p>
         <script src="script.js"></script>
-    `
+    `;
 }

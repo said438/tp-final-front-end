@@ -6,8 +6,5 @@ export function buscarPokemons(pokemons, textoBuscado) {
             .includes(textoBuscado.toLowerCase());
     });
 
-    console.log(pokemonsEncontrados);
-    
-
     return pokemonsEncontrados;
 };
