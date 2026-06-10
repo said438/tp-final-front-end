@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!--link de la biblioteca de iconos de Boostrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!--Mi CSS-->
+    <link rel="stylesheet" href="../CSS/buscar-pokemons.css">
 </head>
 <body>
     <header>
@@ -53,14 +55,33 @@
     </header>
 
     <main>
-        <h1>Buscar Pokemons</h1>
-        <input type="text" id="input-pokemon" placeholder="ingrese un pokemon">
+        <h1>Pokedex</h1>
 
-        <div class="container">
-            <ul id="lista-pokemons" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 list-unstyled">
+        <section id="busqueda">
+            <h2>Buscar Pokemons</h1>
+            <input type="text" id="input-pokemon" placeholder="ingrese un pokemon">
+
+            <div class="container ">
+                <ul id="lista-pokemons" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
         
-            </ul>
-        </div>
+                </ul>
+            </div>
+        </section>
+        
+
+        <!--RECORDAR: Hacer que el grafico sea responsive-->
+        <section id="graficos">
+            <h2>Graficos de Pokemons</h2>
+            <div id="grafico-barras">
+                <!--Genera un grafico de echart dinamicamente-->
+            </div>
+
+            <!--Si sobra tiempo agregar otro grafico-->
+        </section>
+
+        <section id="estadisticas-generales">
+             <!--Genera estadisticas generales dinamicamente-->
+        </section>
     </main>
 
     <!-- 
@@ -93,7 +114,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img id="modal-img" class="card-img-top"></img>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -106,5 +127,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!--script de mi JS-->
     <script type="module" src="/JS/principal.js"></script>
+    <!--CDN de EChart-->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </body>
 </html>

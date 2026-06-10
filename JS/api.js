@@ -8,6 +8,7 @@ export async function obtenerPokemons(){
         const resultado = await respuesta.json();
 
         const promesas = resultado.results.map(async (pokemon) => {
+            console.log(pokemon.url);
             const respuesta = await fetch(pokemon.url);
             const detallePokemon = await respuesta.json();
 
@@ -24,8 +25,6 @@ export async function obtenerPokemons(){
         });
 
         const pokemons = Promise.all(promesas);
-        console.log("1");
-        console.log(pokemons[0]);
         
         //Retornamos los pokemons con sus detalles
         return pokemons;
