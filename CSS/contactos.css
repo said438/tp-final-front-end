@@ -1,0 +1,18 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.sangria{
+    margin-left: 1%;
+}
+
+#mensaje{
+    width: 200%;
+}
+
+
+
+

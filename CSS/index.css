@@ -1,0 +1,14 @@
+.hero-imagen {
+    /*Revisar porque no se aplica el border-radius*/
+    border-radius: 50%;
+    position: relative;
+    background-image: url('tu-imagen-de-fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+}
