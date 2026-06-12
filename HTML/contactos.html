@@ -11,7 +11,9 @@
     <!--Mi CSS-->
     <link rel="stylesheet" href="../CSS/contactos.css">
 </head>
-    
+ 
+<body>
+       
     <!--
     Una página debe incluir un formulario de contacto con mínimo
     6 campos (no todos de tipo texto). La validación debe
@@ -20,73 +22,89 @@
     y amigables. No utilizar validación nativa de HTML.
     -->
 
-
-<header>
-    <nav class="navbar navbar-expand-sm">
-        <div class="container-fluid">
-            <!--button expande la barra de navegación lateral (gracias al toggler)-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!--div contiene los elementos que estaran en la barra de navegación lateral (gracias al offcanvas)-->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasLabel">Poke menu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <!--ul es lista de links de la barra de navegación-->
-                    <ul class="navbar-nav container-fluid d-flex justify-content-center gap-lg-5 gap-md-4 gap-sm-3">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="buscar-pokemons.html">buscar pokemons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">OtraSección</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">OtraSección</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="contactos.html">Contactos</a>
-                        </li>
-                    </ul>
+    <header>
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <!--button expande la barra de navegación lateral (gracias al toggler)-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--div contiene los elementos que estaran en la barra de navegación lateral (gracias al offcanvas)-->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel">Poke menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!--ul es lista de links de la barra de navegación-->
+                        <ul class="navbar-nav container-fluid d-flex justify-content-center gap-lg-5 gap-md-4 gap-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="buscar-pokemons.html">buscar pokemons</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">OtraSección</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="contactos.html">Contactos</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <h1 class="sangria">Contactos</h1>
-</header>
+        <h1 class="sangria">Contactos</h1>
+    </header>
 
-<body>
     <main>
-        <form action="" novalidate class="sangria">
+        <form id="formulario-contactos" class="sangria" novalidate>
             <div>
-                <label for="nombre" class="form-label">Nombre completo: </label>
-                <input type="text" name="nombre" id="nombre" class="form-control">
+                <label for="nombre-completo" class="form-label">Nombre completo: </label>
+                <input type="text" name="nombre" id="nombre-completo" class="form-control"
+                placeholder="Ingrese solo su primer nombre y apellido aquí...">
+
+                <span class="mensaje-error">
+                    <!--Generar mensaje de error dinamicamente-->
+                </span>
             </div>
 
             <div>
-                <label for="edad" class="form-label">Fecha de nacimiento: </label>
-                <input type="date" name="edad" id="edad" class="form-control">
+                <label for="fecha-nacimiento" class="form-label">Fecha de nacimiento: </label>
+                <input type="date" name="edad" id="fecha-nacimiento" class="form-control">
+
+                <span class="mensaje-error">
+                    <!--Generar mensaje de error dinamicamente-->
+                </span>
             </div>
 
             <div>
                 <label for="correo" class="form-label">Correo electronico: </label>
-                <input type="text" name="correo" id="correo" class="form-control">
+                <input type="email" name="correo" id="correo" class="form-control">
+
+                <span class="mensaje-error">
+                    <!--Generar mensaje de error dinamicamente-->
+                </span>
             </div>
 
             <div>
                 <label for="telefono" class="form-label">Telefono: </label>
-                <input type="text" name="telefono" id="correo" class="form-control">
+                <input type="tel" name="telefono" id="telefono" class="form-control"
+                placeholder="Ejemplo: +5493492123456">
+
+                <span class="mensaje-error">
+                    <!--Generar mensaje de error dinamicamente-->
+                </span>
             </div>
 
             <div>
                 <label for="lista-motivos" class="form-label">Motivo del mensaje: </label>
-                <select name="motivo" id="lista-motivos" class="from-select">
+                <select name="motivo" id="lista-motivos" class="form-select">
                     <option value="consulta">Consulta</option>
                     <option value="sugerencia">Sugerencia</option>
                     <option value="error">Reporte de error</option>
@@ -98,6 +116,10 @@
                 <label for="mensaje" class="form-label">Mensaje: </label>
                 <textarea name="mensaje" id="mensaje" placeholder="Ingrese su mensaje aquí..."
                 class="form-control"></textarea>
+
+                <span class="mensaje-error">
+                    <!--Generar mensaje de error dinamicamente-->
+                </span>
             </div>
 
             <!--
@@ -105,40 +127,40 @@
             para que se vea como el resto
              -->
             <div>
-                <label for="lista-motivos" class="form-label">Nivel de importancia: </label>
-                <select name="motivo" id="lista-motivos" class="form-select">
+                <label for="nivel-importancia" class="form-label">Nivel de importancia: </label>
+                <select name="nivel-importancia" id="nivel-importancia" class="form-select">
                     <option value="Urgente">Urgente</option>
                     <option value="Revisar">Se debe revisar</option>
                     <option value="Esperar">Puede esparar</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button id="btn-enviar" class="btn btn-primary">
                 Enviar
             </button>
         </form>
     </main>
-</body>
 
-<footer>
-    <ul>
-        <li>
-            <!--link a GitHub-->
-            <a href="https://github.com/said438/tp-final-front-end.git" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-github fs-2"></i>
-            </a>
-        </li>
+    <footer>
+        <ul>
+            <li>
+                <!--link a GitHub-->
+                <a href="https://github.com/said438/tp-final-front-end.git" target="_blank" rel="noopener noreferrer">
+                    <i class="bi bi-github fs-2"></i>
+                </a>
+            </li>
 
-        <li>
-            <!--link a Linkedin-->
-            <a href="https://www.linkedin.com/in/said-santos/" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-linkedin fs-2"></i>
-            </a>
-        </li>
-    </ul>
-</footer>
-
+            <li>
+                <!--link a Linkedin-->
+                <a href="https://www.linkedin.com/in/said-santos/" target="_blank" rel="noopener noreferrer">
+                    <i class="bi bi-linkedin fs-2"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
     <!--script del JS de Boostrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!--Mi JS-->
+    <script src="../JS/contactos/formulario.js"></script>
 </body>
 </html>
