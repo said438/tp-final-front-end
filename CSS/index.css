@@ -1,14 +1,10 @@
-.hero-imagen {
-    /*Revisar porque no se aplica el border-radius*/
-    border-radius: 50%;
-    position: relative;
-    background-image: url('tu-imagen-de-fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 80vh;
+.contenedor{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #ffffff;
+    max-width: 100%; /*Ocupa el 100% del elemento padre (osea el wrap, en este caso)*/
+    height: 80vh; /*Ocupara el 80% del tamaño de la ventana (cualquiera que sea el dispositivo)*/
+    background-image: url(../img/hero.jpg.webp); /*Coloca una imagen de fondo*/
+    background-repeat: no-repeat; /*Evita que se repita la imagen varias veces*/
+    background-size: cover; /*Permite que la imagen ocupe todo el elemento sin deformarse*/
+    /*Alinea el borde izquierdo de la img con el de su contenedor y la centra verticalmente*/
+    background-position: left; 
 }
