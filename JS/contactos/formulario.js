@@ -1,10 +1,16 @@
 document.getElementById("btn-enviar").addEventListener("click", (event) => {
     event.preventDefault(); // -> Evita que se recargue la pagina al hacer click al boton "Enviar"
 
-    campoNombreCompletoEsValido();
-    campoCorreoEsValido();
-    campoTelefonoEsValido();
-    campoMensajeEsValido();
+    if(
+        campoNombreCompletoEsValido() &&
+        campoCorreoEsValido() &&
+        campoTelefonoEsValido() &&
+        campoMensajeEsValido()
+    ){
+        document.getElementById("formulario-contactos").submit();
+        console.log("Formulario enviado");
+        
+    }
 });
 
 //Funciones de validación principales

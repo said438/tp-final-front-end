@@ -1,10 +1,61 @@
-.contenedor{
+body{
+    font-family: "Nunito", sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: "Fredoka", sans-serif;
+}
+
+h3{
+    font-size: calc(1.3rem + .3vw);
+}
+
+/*Pestaña roja*/
+/*
+#Acerca-de{
     display: flex;
+    background-color: rgb(180, 47, 47);
+    width: 65vh;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 20px 20px 0px 0px;
+    box-sizing: border-box;
+}
+*/
+
+#hero-img{
     max-width: 100%; /*Ocupa el 100% del elemento padre (osea el wrap, en este caso)*/
-    height: 80vh; /*Ocupara el 80% del tamaño de la ventana (cualquiera que sea el dispositivo)*/
+    min-height: 80vh; /*Ocupara el 80% del tamaño de la ventana (cualquiera que sea el dispositivo)*/
+    display: flex;
     background-image: url(../img/hero.jpg.webp); /*Coloca una imagen de fondo*/
     background-repeat: no-repeat; /*Evita que se repita la imagen varias veces*/
     background-size: cover; /*Permite que la imagen ocupe todo el elemento sin deformarse*/
     /*Alinea el borde izquierdo de la img con el de su contenedor y la centra verticalmente*/
     background-position: left; 
 }
+
+#sobre-pokemon{
+    margin: 10px;
+}
+
+/*Si la pantalla tiene 430px o más de tamaño usa la imagen hero para computadoras*/
+@media (min-width: 430px) {
+    #hero-img{
+        background-image: url(../img/hero.jpg.webp);
+    }   
+}
+
+/*Si la pantalla tiene 430px o menos de tamaño usa la imagen hero para moviles*/
+@media (max-width: 430px) {
+    #hero-img{
+        background-image: url(../img/hero-movil.jpg);
+        background-position: 30% center;
+    }   
+}
+
+@media (max-width: 430px) {
+    #hero-img{
+        font-size: 24px;
+    }   
+}
+

@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Home</title>
+    <!--Fuente "Fredoka" de google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <!--Fuente "Nunito" de google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <!--link del CSS de Boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!--link de la biblioteca de iconos de Boostrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!--My CSS-->
+    <!--Mi CSS-->
     <link rel="stylesheet" href="../CSS/index.css">
 </head>
-    
     <!-- 
     Flujo de trabajo por cada modulo:
     1) HTML
@@ -52,10 +59,10 @@
                                 <a class="nav-link" href="#">OtraSección</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">OtraSección</a>
+                                <a class="nav-link" href="../HTML/tipos-pokemons.html">Tipos pokemons</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">OtraSección</a>
+                                <a class="nav-link" href="contactos.html">Contactos</a>
                             </li>
                         </ul>
                     </div>
@@ -66,12 +73,100 @@
     </header>
 
     <main>
-        <section id="hero-img" class="contenedor"></section>  
+        <section id="hero-img"></section>  
 
-        <section id="sobre-la-web">
+        <section id="sobre-pokemon">
             <!-- Explicar que funciones provee la web (recomendación dejar para el final) -->
-            <h2>Sobre la web</h2>
-            <p>Explicar que funciones provee la web (recomendación dejar para el final) </p>
+            <h2 id="Acerca-de">Acerca de pokemon</h2>
+            
+            <div class="contenido">
+                <article>
+                    <h3 class="titulo-article">Un universo de aventura, amistad y descubrimiento</h3>
+                    <p>
+                        Pokémon es una de las franquicias más grandes e influyentes de la cultura popular.
+                        Nacida en Japón en 1996 de la mano de Satoshi Tajiri y Game Freak, esta saga comenzó
+                        como un videojuego para Nintendo Game Boy y se transformó en un fenómeno global que
+                        abarca juegos, anime, películas, cartas coleccionables y mucho más.
+                    </p>
+                    <p>
+                        El nombre Pokémon proviene de la contracción en inglés de <em>Pocket Monsters</em>
+                        (monstruos de bolsillo), y su premisa es tan simple como cautivadora: un mundo
+                        habitado por criaturas extraordinarias con habilidades únicas, llamadas Pokémon, 
+                        que conviven junto a los seres humanos.
+                    </p>
+                </article>
+            
+                <article>
+                    <h3 class="titulo-article">¿En qué consiste este universo?</h3>
+                    <p>
+                        En el mundo Pokémon, los entrenadores —personas que se dedican a capturar y entrenar
+                        estas criaturas— recorren regiones llenas de vida, secretos y desafíos. Cada región
+                        tiene su propio ecosistema, sus propios Pokémon exclusivos y una historia que
+                        descubrir.
+                    </p>
+                    <p>
+                        Los Pokémon se clasifican en más de 18 tipos distintos —fuego, agua, planta, psíquico,
+                        dragón, entre otros— y cada uno presenta fortalezas y debilidades frente a los demás.
+                        Hoy en día existen más de 1.000 especies diferentes, cada una con su propio diseño,
+                        historia y personalidad.
+                    </p>
+                </article>
+
+                <article>
+                    <h3 class="titulo-article">Los pilares del mundo Pokémon</h3>
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <dt>Combates</dt>
+                            </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <dd>Los entrenadores se desafían mutuamente en batallas estratégicas por turnos.</dd>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <dt>Captura</dt>
+                            </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <dd>Se usan las famosas Poké Balls para atrapar nuevas especies y completar la Pokédex.</dd>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <dt>Amistad</dt>
+                            </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <dd>El vínculo entre entrenador y Pokémon es el motor de toda la saga.</dd>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <dt>Exploración</dt>
+                            </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <dd>Cada región es un mundo por descubrir, con mazmorras, ciudades y misterios.</dd>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
 

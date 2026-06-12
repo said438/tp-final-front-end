@@ -1,4 +1,4 @@
-import {obtenerPokemons} from "./api.js";
+import {obtenerPokemons} from "../golbales/api.js";
 import {
     actualizarModalPokemon,
     actualizarVistaBusquedaPokemon

@@ -1,4 +1,4 @@
-import {Pokemon} from "./pokemon.js"
+import {Pokemon} from "../golbales/objPokemon.js"
 
 export function actualizarVistaBusquedaPokemon(pokemons){
     /*Como hambas funciones denpenden de la lista de pokemons
@@ -8,7 +8,7 @@ export function actualizarVistaBusquedaPokemon(pokemons){
     mostararEstadisticasGenerales(pokemons);
 }
 
-export async function mostrarPokemons(pokemons){
+export function mostrarPokemons(pokemons){
     const listaPokemons = document.getElementById("lista-pokemons");
     
     listaPokemons.innerHTML = "";
@@ -47,7 +47,9 @@ export function actualizarModalPokemon(pokemon){
         <ul>
             <li>Altura: ${pokemon.altura}</li>
             <li>Peso: ${pokemon.peso}</li>
-            <li>Tipo: ${pokemon.tipo}</li>
+            <li>
+                Tipo/s: ${pokemon.tipos}
+            </li>
         </ul>
     `;
 
@@ -98,13 +100,18 @@ function obtenerCantidadDeCadaTipoPokemon(pokemons){
     /*Objeto que almacena y lleva la cuenta de cada tipo*/
     function TiposPokemons(){}
 
-    //Hace la operación de conteo
+    //Hace la operación de conteo de los tipos de cada pokemon
     pokemons.map(pokemon =>{
-        if(!(pokemon.tipo in TiposPokemons)){
-            TiposPokemons[pokemon.tipo] = 1;
-        }else{
-            TiposPokemons[pokemon.tipo]++;
-        }
+        //Un mismo pokemon puede ser de varios tipos
+        pokemon.tipos.map(tipo =>{
+            if(!(tipo in TiposPokemons)){
+                //Agrega el tipo al objeto y lo inicializa en uno
+                TiposPokemons[tipo] = 1;
+            }else{
+                //Le suma uno al tipo que ya agrego anteriormente
+                TiposPokemons[tipo]++;
+            }
+        })
     });
 
     return TiposPokemons;
