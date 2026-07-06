@@ -9,7 +9,6 @@ document.getElementById("btn-enviar").addEventListener("click", (event) => {
     ){
         document.getElementById("formulario-contactos").submit();
         console.log("Formulario enviado");
-        
     }
 });
 

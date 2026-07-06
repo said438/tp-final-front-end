@@ -1,4 +1,4 @@
-import {obtenerPokemons} from "../golbales/api.js";
+import {obtenerPokemons} from "/src/services/api.js";
 import {
     actualizarModalPokemon,
     actualizarVistaBusquedaPokemon
@@ -15,8 +15,7 @@ async function EjecucionPrincipal(){
     actualizarVistaBusquedaPokemon(pokemons);
 
     //Eventos
-    document.getElementById("input-pokemon").addEventListener("input", async (event) => {
-        const nombresPokemons = pokemons.map(pokemon => pokemon.nombre);
+    document.getElementById("input-pokemon").addEventListener("input", (event) => {
         const textoInput = event.target.value;
 
         //Si el input esta vacio actualiza la vista y termina la ejecución
@@ -25,10 +24,11 @@ async function EjecucionPrincipal(){
             return;
         }
 
-        actualizarVistaBusquedaPokemon(buscarPokemons(pokemons, textoInput));
+        const pokemonsFiltrados = buscarPokemons(pokemons, textoInput)
+        actualizarVistaBusquedaPokemon(pokemonsFiltrados);
     });
 
-    document.getElementById("lista-pokemons").addEventListener("click", async (event) => {
+    document.getElementById("lista-pokemons").addEventListener("click", (event) => {
         const tarjetaPokemon = event.target.closest(".card"); 
         const pokemon = pokemons.filter(pokemon => {
             return `pokemon-${pokemon.id}` === tarjetaPokemon.id

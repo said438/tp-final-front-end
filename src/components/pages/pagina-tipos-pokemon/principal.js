@@ -1,5 +1,5 @@
 import {mostrarPokemons} from "./renderizado.js"
-import {obtenerPokemonsPopulares} from "../golbales/api.js";
+import {obtenerPokemonsPopulares} from "/src/services/api.js";
 
 principal();
 

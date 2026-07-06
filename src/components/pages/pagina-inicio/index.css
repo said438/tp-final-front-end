@@ -41,14 +41,14 @@ h3{
 /*Si la pantalla tiene 430px o más de tamaño usa la imagen hero para computadoras*/
 @media (min-width: 430px) {
     #hero-img{
-        background-image: url(../img/hero.jpg.webp);
+        background-image: url(/src/assets/img/hero.jpg.webp);
     }   
 }
 
 /*Si la pantalla tiene 430px o menos de tamaño usa la imagen hero para moviles*/
 @media (max-width: 430px) {
     #hero-img{
-        background-image: url(../img/hero-movil.jpg);
+        background-image: url(/src/assets/img/hero-movil.jpg);
         background-position: 30% center;
     }   
 }

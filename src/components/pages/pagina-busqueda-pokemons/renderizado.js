@@ -1,4 +1,4 @@
-import {Pokemon} from "../golbales/objPokemon.js"
+import {Pokemon} from "../../../models/objPokemon.js"
 
 export function actualizarVistaBusquedaPokemon(pokemons){
     /*Como hambas funciones denpenden de la lista de pokemons
@@ -93,7 +93,42 @@ export function mostrarGraficos(pokemons){
     myChart.setOption(option);
 }
 
-//Funcion uxiliar de mostrarGrafico()
+function mostararEstadisticasGenerales(pokemons){
+    const tipoMasFrecuente = obtenerTipoPokemonMasFrecuente(pokemons);
+    const pesoPromedio = obtenerPromedio(pokemons.map(pokemon => pokemon.peso));
+    const alturaPromedio = obtenerPromedio(pokemons.map(pokemon => pokemon.altura));
+
+    document.getElementById("estadisticas-generales").innerHTML = `
+        <h2>Estadísticas generales</h2>
+
+        <ul>
+            <li>Total de Pokémon cargados: ${pokemons.length}</li>
+            <li>Tipo más frecuente: ${tipoMasFrecuente}</li>
+            <li>Promedio de peso: ${pesoPromedio}</li>
+            <li>Promedio de altura: ${alturaPromedio}</li>
+        </ul>
+    `
+}
+
+//Funciones auxiliares
+function obtenerTipoPokemonMasFrecuente(pokemons){
+    const cantidadDeCadaTipoDePokemon = obtenerCantidadDeCadaTipoPokemon(pokemons);
+    const tipos = Object.keys(cantidadDeCadaTipoDePokemon);
+    const cantidades = Object.values(cantidadDeCadaTipoDePokemon);
+
+    let max = 0;
+    let tipoMasFrecuente = 0;
+
+    for (let index = 0; index < cantidades.length; index++) {
+        if(cantidades[index] > max){
+            max = cantidades[index];
+            tipoMasFrecuente = tipos[index];
+        }
+    }
+
+    return tipoMasFrecuente;
+}
+
 function obtenerCantidadDeCadaTipoPokemon(pokemons){
     const contador = 0;
 
@@ -117,41 +152,6 @@ function obtenerCantidadDeCadaTipoPokemon(pokemons){
     return TiposPokemons;
 }
 
-function mostararEstadisticasGenerales(pokemons){
-    const tipoMasFrecuente = obtenerTipoPokemonMasFrecuente(pokemons);
-    const pesoPromedio = obtenerPromedio(pokemons.map(pokemon => pokemon.peso));
-    const alturaPromedio = obtenerPromedio(pokemons.map(pokemon => pokemon.altura));
-
-    document.getElementById("estadisticas-generales").innerHTML = `
-        <h2>Estadísticas generales</h2>
-
-        <ul>
-            <li>Total de Pokémon cargados: ${pokemons.length}</li>
-            <li>Tipo más frecuente: ${tipoMasFrecuente}</li>
-            <li>Promedio de peso: ${pesoPromedio}</li>
-            <li>Promedio de altura: ${alturaPromedio}</li>
-        </ul>
-    `
-}
-
-function obtenerTipoPokemonMasFrecuente(pokemons){
-    const cantidadDeCadaTipoDePokemon = obtenerCantidadDeCadaTipoPokemon(pokemons);
-    const tipos = Object.keys(cantidadDeCadaTipoDePokemon);
-    const cantidades = Object.values(cantidadDeCadaTipoDePokemon);
-
-    let max = 0;
-    let tipoMasFrecuente = 0;
-
-    for (let index = 0; index < cantidades.length; index++) {
-        if(cantidades[index] > max){
-            max = cantidades[index];
-            tipoMasFrecuente = tipos[index];
-        }
-    }
-
-    return tipoMasFrecuente;
-}
-
 function obtenerPromedio(array){
     let suma = 0;
     array.forEach(elemento => {
@@ -161,10 +161,3 @@ function obtenerPromedio(array){
     return (suma/array.length);
 }
 
-//Función global para hacerle saber al usuario que hubo un error con la API
-export function mostrarMensajeErrorApi(){
-    document.body.innerHTML = `
-        <p> Hubo un error. No se pudo obtener los datos de la API. </p>
-        <script src="script.js"></script>
-    `;
-}
