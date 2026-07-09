@@ -1,0 +1,29 @@
+* Refactorizar la parte de las cartas y la busqueda de poquemons en la página "buscar pokemons", siguendo
+estas reglas:
+
+    1 Página Listado con Vue.
+    Construir una página nueva, similar al requisito 3 (punto
+    anterior, “Consumo de API pública”) pero utilizando VueJS. Si
+    el alumno lo considera conveniente, puede usar la misma API.
+
+    2 Buscador del listado con Vue.
+    El listado de la API (ya en Vue) debe incluir un campo de
+    búsqueda, que nos debe permitir buscar por algún campo para
+    filtrar el listado. Además, debe existir un contador de
+    “resultados encontrados” que debe actualizarse reactivamente.
+
+    3 Soporte de estados de petición.
+    La página Vue debe gestionar los tres estados clásicos:
+    cargando, error y datos listos cuando se haga el fetch a la API.
+
+    4 Usar Componentes Vue 
+    Al menos un componente reutilizable con props.
+
+    5 Filtrado por categoría/atributo combinado con búsqueda.
+    Además del buscador de texto, agregar un <select> que filtre
+    por algún atributo de los objetos de la API (categoría, tipo,
+    rango, etc.)
+    
+* Agregar un boton para mostrar más pokemons en la pág "buscar-pokemons".
+* Hacer el footer un componente reutilizable con Vue.
+

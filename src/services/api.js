@@ -1,5 +1,5 @@
 //Funciones de API's
-import {Pokemon} from "../models/objPokemon.js"
+import {Pokemon} from "/src/models/objPokemon.js"
 import {mostrarMensajeErrorApi} from "/src/utils/excepciones.js";
 
 export async function obtenerPokemons(){

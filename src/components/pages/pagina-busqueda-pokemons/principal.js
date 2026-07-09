@@ -1,6 +1,5 @@
 import {obtenerPokemons} from "/src/services/api.js";
 import {
-    actualizarModalPokemon,
     actualizarVistaBusquedaPokemon
 } from "./renderizado.js";
 import {buscarPokemons} from "./busqueda.js";
@@ -28,6 +27,7 @@ async function EjecucionPrincipal(){
         actualizarVistaBusquedaPokemon(pokemonsFiltrados);
     });
 
+    /*
     document.getElementById("lista-pokemons").addEventListener("click", (event) => {
         const tarjetaPokemon = event.target.closest(".card"); 
         const pokemon = pokemons.filter(pokemon => {
@@ -36,4 +36,5 @@ async function EjecucionPrincipal(){
 
         actualizarModalPokemon(pokemon[0]);
     })
+    */
 }

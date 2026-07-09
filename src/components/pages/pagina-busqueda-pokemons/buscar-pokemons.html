@@ -61,15 +61,37 @@
     <main>
         <h1>Pokedex</h1>
 
-        <section id="busqueda">
-            <h2>Buscar Pokemons</h1>
-            <input type="text" id="input-pokemon" placeholder="ingrese un pokemon">
+        <section id="busqueda-pokemons">
+            <h2>Buscar Pokemons</h2>
+            <input v-model="textoDeBusqueda" @input="buscarPokemonsPorNombre" type="text" id="input-pokemon" placeholder="ingrese un pokemon">
 
-            <div class="container ">
-                <ul id="lista-pokemons" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
-        
-                </ul>
-            </div>
+            <p v-if="cargando" class="fs-1" > Cargando pokemones... </p>
+            <template v-else-if="error !== null"> 
+                <p> hubo un error al obtener los datos </p>
+                <button @click="obtenerPokemons"> Reintentar </button>
+            </template>
+            <template v-else>
+                <p>cantidad de pokemons encontrados: {{ contadorPokemons }}</p>
+                <div class="container">
+                    <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
+                        <li v-for="pokemon in pokemonsEncontrados" :key="pokemon.id" :id="pokemon.id" class="col">
+                            <div class="card h-100">
+                                <img :src="pokemon.urlImagen" class="card-img-top" :alt="pokemon.nombre">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">{{pokemon.nombre}}</h5>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- funcionalidad del modal Pokemon (en pausa)
+                <modal-pokemon v-show="modalListo" :pokemon="pokemonEncontrado" @modalListo="(booleano) => modalListo = booleano">
+
+                </modal-pokemon>
+                -->
+            </template>
         </section>
         
 
@@ -109,28 +131,39 @@
         </ul>
     </footer>
 
-    <!--Tarjeta pokemon expandida (Actualizable)-->
+    <!--Tarjeta pokemon expandida actualizable con Vue (en proceso)
     <div id="tarjeta-pokemon-expandida" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="modal-titulo" class="modal-title">Nombre pokemon</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
+                <div class="modal-header">
+                    <h5 id="modal-titulo" class="modal-title">{{pokemonEncontrado.nombre}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-img" class="card-img-top" :src="pokemonEncontrado.urlImagen" :alt="pokemonEncontrado.nombre">
+
+                    </img>
+                    <ul>
+                        <li>Altura: {{pokemonEncontrado.altura}}</li>
+                        <li>Peso: {{pokemonEncontrado.peso}}</li>
+                        <li>Tipo/s: {{pokemonEncontrado.tipos}}</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    -->
 
     <!--script del JS de Boostrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!--script de mi JS-->
     <script type="module" src="/src/components/pages/pagina-busqueda-pokemons/principal.js"></script>
+    <script type="module" src="/src/components/pages/pagina-busqueda-pokemons/busqueda-pokemons.js"></script>
     <!--CDN de EChart-->
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </body>

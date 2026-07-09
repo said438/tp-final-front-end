@@ -1,60 +1,10 @@
-import {Pokemon} from "../../../models/objPokemon.js"
+import {Pokemon} from "/src/models/objPokemon.js"
 
 export function actualizarVistaBusquedaPokemon(pokemons){
     /*Como hambas funciones denpenden de la lista de pokemons
     las pongo a hambas en una sola función*/
-    mostrarPokemons(pokemons);
     mostrarGraficos(pokemons);
     mostararEstadisticasGenerales(pokemons);
-}
-
-export function mostrarPokemons(pokemons){
-    const listaPokemons = document.getElementById("lista-pokemons");
-    
-    listaPokemons.innerHTML = "";
-
-    pokemons.map(pokemon => {
-        listaPokemons.innerHTML += `
-            <li class="col">
-                <div id="pokemon-${pokemon.id}" 
-                    class="card h-100"
-                    data-bs-toggle="modal"
-                    data-bs-target="#tarjeta-pokemon-expandida">
-
-                    <img src="${pokemon.urlImagen}" 
-                        class="card-img-top" 
-                        alt="${pokemon.nombre}">
-
-                    <div class="card-body">
-                        <h5 class="card-title">${pokemon.nombre}</h5>
-                    </div>
-                </div>
-            </li>
-            `;
-    });
-}
-
-export function actualizarModalPokemon(pokemon){
-    //Agregar atributos del pokemon al cuerpo del modal y la imagen
-    document.querySelector(".modal-body").innerHTML = `
-        <!--Imagen del pokemon-->
-        <img id="modal-img" 
-            class="card-img-top"
-            src="${pokemon.urlImagen}"
-            alt="${pokemon.nombre}"></img>
-
-        <!--Atributos del pokemon-->
-        <ul>
-            <li>Altura: ${pokemon.altura}</li>
-            <li>Peso: ${pokemon.peso}</li>
-            <li>
-                Tipo/s: ${pokemon.tipos}
-            </li>
-        </ul>
-    `;
-
-    //Nombre del Pokemons
-    document.getElementById("modal-titulo").textContent = pokemon.nombre;
 }
 
 //Genera y muestra los graficos echos con eChart
