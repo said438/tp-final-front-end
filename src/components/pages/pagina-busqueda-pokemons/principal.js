@@ -1,40 +1,28 @@
 import {obtenerPokemons} from "/src/services/api.js";
-import {
-    actualizarVistaBusquedaPokemon
-} from "./renderizado.js";
+import {actualizarEstadisticasPokemon} from "./renderizado.js";
 import {buscarPokemons} from "./busqueda.js";
 
+
 //Ejecución
-EjecucionPrincipal();
+/*EjecucionPrincipal();*/
 
 //Funcion principal
 async function EjecucionPrincipal(){
     const pokemons = await obtenerPokemons();
 
-    actualizarVistaBusquedaPokemon(pokemons);
+    actualizarEstadisticasPokemon(pokemons);
 
     //Eventos
-    document.getElementById("input-pokemon").addEventListener("input", (event) => {
+    document.getElementById("busqueda-pokemons").addEventListener("input", (event) => {
         const textoInput = event.target.value;
 
         //Si el input esta vacio actualiza la vista y termina la ejecución
         if(textoInput.trim() === ""){
-            actualizarVistaBusquedaPokemon(pokemons);
+            actualizarEstadisticasPokemon(pokemons);
             return;
         }
 
         const pokemonsFiltrados = buscarPokemons(pokemons, textoInput)
-        actualizarVistaBusquedaPokemon(pokemonsFiltrados);
+        actualizarEstadisticasPokemon(pokemonsFiltrados);
     });
-
-    /*
-    document.getElementById("lista-pokemons").addEventListener("click", (event) => {
-        const tarjetaPokemon = event.target.closest(".card"); 
-        const pokemon = pokemons.filter(pokemon => {
-            return `pokemon-${pokemon.id}` === tarjetaPokemon.id
-        });
-
-        actualizarModalPokemon(pokemon[0]);
-    })
-    */
 }

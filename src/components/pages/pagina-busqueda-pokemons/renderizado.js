@@ -1,6 +1,6 @@
 import {Pokemon} from "/src/models/objPokemon.js"
 
-export function actualizarVistaBusquedaPokemon(pokemons){
+export function actualizarEstadisticasPokemon(pokemons){
     /*Como hambas funciones denpenden de la lista de pokemons
     las pongo a hambas en una sola función*/
     mostrarGraficos(pokemons);
