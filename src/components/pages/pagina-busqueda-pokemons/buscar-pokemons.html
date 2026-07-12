@@ -67,12 +67,11 @@
             <label for="nombre-pokemon" class="visually-hidden"> buscar pokemones: </label>
             <input v-model="textoDeBusqueda" type="text" id="nombre-pokemon" placeholder="ej: bulbasaur">
 
-            <p v-if="cargando" class="fs-1" > Cargando pokemones... </p>
-            <p v-else-if="error !== null" class="fs-1"> Hubo un error al obtener los datos </p>
+            <p v-if="cargandoDatosIniciales" class="fs-1"> Cargando datos... </p>
+            <p v-else-if="errorDatosIniciales !== null" class="fs-1"> Hubo un error al obtener los datos </p>
             <template v-else>
-
                 <label for="tipos-pokemons" class="visually-hidden"> buscar pokemones: </label>
-                <select v-model="tipoDePokemonSeleccionado">
+                <select id="tipos-pokemons" v-model="tipoDePokemonSeleccionado">
                     <option value="Todos" selected>Todos</option>
                     <option v-for="tipo in tiposDePokemons" :value="tipo" :key="tipo">
                         {{tipo}}
@@ -81,6 +80,7 @@
 
                 <p>cantidad de pokemons encontrados: {{ contadorPokemons }}</p>
 
+                
                 <div class="container">
                     <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
                         <li v-for="pokemon in pokemonsFiltrados" :key="pokemon.id" :id="pokemon.id" class="col">
@@ -89,7 +89,12 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">{{pokemon.nombre}}</h5>
-                                    <p>tipo: {{pokemon.tipos}}</p>
+                                    <h6>tipos: </h6>
+                                    <ul>
+                                        <li v-for="tipo in pokemon.tipos">
+                                            {{tipo}}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </li>
@@ -101,6 +106,15 @@
 
                 </modal-pokemon>
                 -->
+
+                <p v-if="cargandoObtenerMasPokemons" class="fs-1"> Cargando más pokemones... </p>
+                <p v-else-if="errorObtenerMasPokemons !== null" class="fs-1"> 
+                    Hubo un error al intentar cargar más pokemons 
+                </p>
+
+                <button @click="cargarMasPokemons">
+                    Ver más pokemones
+                </button>
             </template>
         </section>
         

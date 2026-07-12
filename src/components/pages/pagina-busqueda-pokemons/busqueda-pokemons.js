@@ -11,12 +11,23 @@ createApp({
 
     data(){
         return {
+            //estructuras de datos
             pokemons: [],
             tiposDePokemons: [],
-            cargando: true,
-            error: null,
+            //inputs
             textoDeBusqueda: '',
-            tipoDePokemonSeleccionado: 'Todos'
+            tipoDePokemonSeleccionado: 'Todos',
+            //Banderas de estados de la API
+            cargandoDatosIniciales: false,
+            errorDatosIniciales: null,
+            cargandoObtenerMasPokemons: false,
+            errorObtenerMasPokemons: null,
+
+            //Manejo de paginación de la API
+            //Cantidad de veces que se busco pokemons de la Api 
+            cantidadPeticionesApi: 2,
+            //Cantidad de pokemons que se obtienen en cada llamada a la Api
+            rangoPokemon: 20
         }
     },
 
@@ -43,16 +54,30 @@ createApp({
                 return coincideNombre(pokemon) && coincideTipo(pokemon)
             });
 
+            console.log(`Lista de pokemons filtrados: ${pokemonsFiltrados}`);
+            
             return pokemonsFiltrados;
         },
 
         contadorPokemons(){
             return this.pokemonsFiltrados.length;
         },
+
+        //Limite inferior del Id del pokemon a obtener (desde)
+        idPokemonInferior(){
+            return (this.cantidadPeticionesApi - 1) * this.rangoPokemon + 1;
+        },
+
+        //Limite superior del Id del pokemon a obtener (hasta)
+        idPokemonSuperior(){
+            return this.cantidadPeticionesApi * this.rangoPokemon;
+        },
     },
 
     methods: {
         async cargarDatosIniciales(){
+            this.cargandoDatosIniciales = true;
+
             try{
                 //Resolvemos las dos promesas simultaneamente
                 const tareasAsincronas = [obtenerPokemons(), obtenerTiposDePokemons()];
@@ -61,10 +86,26 @@ createApp({
                 this.pokemons = resultados[0];
                 this.tiposDePokemons = resultados[1];
             } catch (ex) {
-                this.error = ex.message;
-                console.log(`Ocurrio una excepción: ${ex.message}`);
+                this.errorDatosIniciales = ex.message;
+                console.log(`Ocurrio una excepción al cargar los datos iniciales: ${ex.message}`);
             } finally {
-                this.cargando = false;
+                this.cargandoDatosIniciales = false;
+            }
+        },
+
+        async cargarMasPokemons(){
+            this.cargandoObtenerMasPokemons = true;
+            this.errorObtenerMasPokemons = null;
+
+            try{
+                const nuevosPokemons = await obtenerPokemons(this.idPokemonInferior, this.idPokemonSuperior);
+                this.pokemons.push(...nuevosPokemons);
+                this.cantidadPeticionesApi += 1;
+            }catch(ex){
+                this.error = ex;
+                console.log(`Ocurrio una excepción al cargar más pokemons: ${ex.message}`);
+            }finally{
+                this.cargandoObtenerMasPokemons = false;
             }
         }
     },

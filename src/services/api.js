@@ -3,39 +3,66 @@ import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import {Pokemon} from "/src/models/objPokemon.js"
 import {mostrarMensajeErrorApi} from "/src/utils/excepciones.js";
 
-export async function obtenerPokemons(){
-    const resultado = await consultarAPI("https://pokeapi.co/api/v2/pokemon");
+const URL_BASE = 'https://pokeapi.co/api/v2';
 
-    const promesas = resultado.results.map(async (pokemon) => {
-        const detallePokemon = await consultarAPI(pokemon.url);
+export async function obtenerPokemons(desde = 1, hasta = 20){
+    try{
+        const promesas = [];
 
-        /*Le colocamos al Obj Pokemon los detalles
-        que nos interesan con los datos obtenidos de la Api*/
-        return new Pokemon(
-            detallePokemon.id,
-            detallePokemon.name,
-            detallePokemon.height,
-            detallePokemon.weight,
-            detallePokemon.types.map(e => e.type.name),
-            detallePokemon.sprites.front_default
-        );
-    });
+        for (let idPokemon = desde; idPokemon <= hasta; idPokemon++) {
+            const detallePokemon = await consultarAPI(`${URL_BASE}/pokemon/${idPokemon}`);
+            
+            const nuevoPokemon = new Pokemon(
+                detallePokemon.id,
+                detallePokemon.name,
+                detallePokemon.height,
+                detallePokemon.weight,
+                detallePokemon.types.map(e => e.type.name),
+                detallePokemon.sprites.front_default
+            )
 
-    const pokemons = await Promise.all(promesas);
-    return pokemons;
+            promesas.push(nuevoPokemon);
+        }
+            
+        const pokemons = await Promise.all(promesas);
+        return pokemons;
+    }catch(ex){
+        throw new Error(`Error al obtener los pokemons desde la API: ${ex}`);
+    }
+    
 }
 
 export async function obtenerTiposDePokemons(){
-    let url = 'https://pokeapi.co/api/v2/type';
+    try{
+        let url = `${URL_BASE}/type`;
+        let resultado;
+        const tiposDePokemons = [];
+
+        do{
+            resultado = await consultarAPI(url);
+            resultado.results.forEach(elemento => {
+                tiposDePokemons.push(elemento.name);
+            });
+
+            url = resultado.next;
+        }while(url !== null);
+
+        return tiposDePokemons;
+    }catch(ex){
+        throw new Error(`Error al obtener los tipos de pokemons desde la API: ${ex}`);
+    }
+    
+}
+
+export async function obtnerPokemonsPorNombre(nombrePokemon){
+    let url = `${URL_BASE}/pokemon/${nombrePokemon}`;
     let resultado;
-    const tiposDePokemons = [];
+    const pokemons = [];
 
     do{
         resultado = await consultarAPI(url);
-        resultado.results.forEach(elemento => {
-            tiposDePokemons.push(elemento.name);
-        });
-
+        resultado.results.filter(pokemon => pokemon.name === nombrePokemon);
+        
         url = resultado.next;
     }while(url !== null);
 
@@ -53,7 +80,7 @@ export async function obtenerPokemonsPopulares(){
     ];
 
     const promesas = idPokemonsPopulares.map(async (id) =>{
-        const detallePokemon = await consultarAPI(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        const detallePokemon = await consultarAPI(`${URL_BASE}/pokemon/${id}`)
 
         return new Pokemon(
             detallePokemon.id,
