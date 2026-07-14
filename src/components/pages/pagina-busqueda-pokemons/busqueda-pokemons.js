@@ -1,12 +1,15 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-import modalPokemon from './modal-pokemon.js'
 import {Pokemon} from '/src/models/objPokemon.js'
 import {obtenerPokemons, obtenerTiposDePokemons} from '/src/services/api.js'
+import componenteModal from './componente-modal.js'
+import componenteGrafico from './componente-grafico.js'
+import componenteEstadistica from './componente-estadistica.js'
 
-createApp({
-
+const appBusquedaPokemons = createApp({
     components:{
-        modalPokemon
+        componenteModal,
+        componenteGrafico,
+        componenteEstadistica
     },
 
     data(){
@@ -53,8 +56,6 @@ createApp({
             const pokemonsFiltrados = this.pokemons.filter(pokemon => {
                 return coincideNombre(pokemon) && coincideTipo(pokemon)
             });
-
-            console.log(`Lista de pokemons filtrados: ${pokemonsFiltrados}`);
             
             return pokemonsFiltrados;
         },
@@ -95,7 +96,6 @@ createApp({
 
         async cargarMasPokemons(){
             this.cargandoObtenerMasPokemons = true;
-            this.errorObtenerMasPokemons = null;
 
             try{
                 const nuevosPokemons = await obtenerPokemons(this.idPokemonInferior, this.idPokemonSuperior);
@@ -107,11 +107,32 @@ createApp({
             }finally{
                 this.cargandoObtenerMasPokemons = false;
             }
+        },
+
+        //Este componente nunca usa este metodo, solo se los pasa a sus componentes hijos.
+        obtenerCantidadesDeTiposDePokemons(pokemons){
+            const contador = 0;
+
+            //Objeto que almacena y lleva la cuenta de cada tipo
+            function TiposPokemons(){}
+
+            //Hace la operación de conteo
+            pokemons.map(pokemon =>{
+                pokemon.tipos.map(tipo =>{
+                    if(!(tipo in TiposPokemons)){
+                        TiposPokemons[tipo] = 1;
+                    }else{
+                        TiposPokemons[tipo] += 1;
+                    }
+                })
+            });
+
+            return TiposPokemons;
         }
     },
 
     created(){
         this.cargarDatosIniciales();
     }
-}).mount('#busqueda-pokemons')
+}).mount('#app')
 

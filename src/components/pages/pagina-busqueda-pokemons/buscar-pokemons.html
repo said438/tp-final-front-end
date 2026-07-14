@@ -60,78 +60,76 @@
 
     <main>
         <h1>Pokedex</h1>
+        <div id="app">
+            <section id="busqueda-pokemons">
+                <h2>Buscar Pokemons</h2>
 
-        <section id="busqueda-pokemons">
-            <h2>Buscar Pokemons</h2>
+                <label for="nombre-pokemon" class="visually-hidden"> buscar pokemones: </label>
+                <input v-model="textoDeBusqueda" id="nombre-pokemon" placeholder="ej: bulbasaur">
 
-            <label for="nombre-pokemon" class="visually-hidden"> buscar pokemones: </label>
-            <input v-model="textoDeBusqueda" type="text" id="nombre-pokemon" placeholder="ej: bulbasaur">
+                <p v-if="cargandoDatosIniciales" class="fs-1"> Cargando datos... </p>
+                <p v-else-if="errorDatosIniciales !== null" class="fs-1"> Hubo un error al obtener los datos </p>
+                <template v-else>
+                    <label for="tipos-pokemons" class="visually-hidden"> buscar pokemones: </label>
+                    <select id="tipos-pokemons" v-model="tipoDePokemonSeleccionado">
+                        <option value="Todos" selected>Todos</option>
+                        <option v-for="tipo in tiposDePokemons" :value="tipo" :key="tipo">
+                            {{tipo}}
+                        </option>
+                    </select>
 
-            <p v-if="cargandoDatosIniciales" class="fs-1"> Cargando datos... </p>
-            <p v-else-if="errorDatosIniciales !== null" class="fs-1"> Hubo un error al obtener los datos </p>
-            <template v-else>
-                <label for="tipos-pokemons" class="visually-hidden"> buscar pokemones: </label>
-                <select id="tipos-pokemons" v-model="tipoDePokemonSeleccionado">
-                    <option value="Todos" selected>Todos</option>
-                    <option v-for="tipo in tiposDePokemons" :value="tipo" :key="tipo">
-                        {{tipo}}
-                    </option>
-                </select>
+                    <p>cantidad de pokemons encontrados: {{ contadorPokemons }}</p>
+                    
+                    <div class="container">
+                        <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
+                            <li v-for="pokemon in pokemonsFiltrados" :key="pokemon.id" :id="pokemon.id" class="col">
+                                <div class="card h-100">
+                                    <img :src="pokemon.urlImagen" class="card-img-top" :alt="pokemon.nombre">
 
-                <p>cantidad de pokemons encontrados: {{ contadorPokemons }}</p>
-
-                
-                <div class="container">
-                    <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
-                        <li v-for="pokemon in pokemonsFiltrados" :key="pokemon.id" :id="pokemon.id" class="col">
-                            <div class="card h-100">
-                                <img :src="pokemon.urlImagen" class="card-img-top" :alt="pokemon.nombre">
-
-                                <div class="card-body">
-                                    <h5 class="card-title">{{pokemon.nombre}}</h5>
-                                    <h6>tipos: </h6>
-                                    <ul>
-                                        <li v-for="tipo in pokemon.tipos">
-                                            {{tipo}}
-                                        </li>
-                                    </ul>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{pokemon.nombre}}</h5>
+                                        <h6>tipos: </h6>
+                                        <ul>
+                                            <li v-for="tipo in pokemon.tipos">
+                                                {{tipo}}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- funcionalidad del modal Pokemon (en pausa)
-                <modal-pokemon v-show="modalListo" :pokemon="pokemonEncontrado" @modalListo="(booleano) => modalListo = booleano">
+                    <!-- funcionalidad del modal Pokemon (en pausa)
+                    <modal-pokemon v-show="modalListo" :pokemon="pokemonEncontrado" @modalListo="(booleano) => modalListo = booleano">
 
-                </modal-pokemon>
-                -->
+                    </modal-pokemon>
+                    -->
 
-                <p v-if="cargandoObtenerMasPokemons" class="fs-1"> Cargando más pokemones... </p>
-                <p v-else-if="errorObtenerMasPokemons !== null" class="fs-1"> 
-                    Hubo un error al intentar cargar más pokemons 
-                </p>
+                    <p v-if="cargandoObtenerMasPokemons" class="fs-1"> Cargando más pokemones... </p>
+                    <p v-else-if="errorObtenerMasPokemons !== null" class="fs-1"> 
+                        Hubo un error al intentar cargar más pokemons 
+                    </p>
+                    
+                    <button @click="cargarMasPokemons" :obtenerCantidadesDeTiposDePokemons="obtenerCantidadesDeTiposDePokemons">
+                        Ver más pokemones
+                    </button>
 
-                <button @click="cargarMasPokemons">
-                    Ver más pokemones
-                </button>
-            </template>
-        </section>
+                    <componente-grafico :pokemons="pokemonsFiltrados">
+                        <!--Generar graficos dinamicamente con Vue-->
+                    </componente-grafico>
+
+                    <componente-estadistica
+                    :pokemons='pokemonsFiltrados'
+                    :obtener-cantidades-de-tipos-de-pokemons='obtenerCantidadesDeTiposDePokemons'>
+                        <!--Generar estadisticas dinamicamente con Vue-->
+                    </componente-estadistica>
+
+                </template>
+            </section>
+        </div>
+
         
-
-        <!--RECORDAR: Hacer que el grafico sea responsive-->
-        <section id="graficos">
-            <h2>Graficos de Pokemons</h2>
-            <div id="grafico-barras">
-                <!--Genera un grafico de echart dinamicamente-->
-            </div>
-
-            <!--Si sobra tiempo agregar otro grafico-->
-        </section>
-
-        <section id="estadisticas-generales">
-             <!--Genera estadisticas generales dinamicamente-->
-        </section>
     </main>
 
     <!-- 
@@ -188,7 +186,7 @@
     <!--script de mi JS-->
     <script type="module" src="/src/components/pages/pagina-busqueda-pokemons/principal.js"></script>
     <script type="module" src="/src/components/pages/pagina-busqueda-pokemons/busqueda-pokemons.js"></script>
-    <!--CDN de EChart-->
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <!--CDN de Echarts-->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"></script>
 </body>
 </html>
