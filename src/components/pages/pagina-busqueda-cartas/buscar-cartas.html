@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar pokemons</title>
+    <title>Buscar cartas</title>
     <!--link del CSS de Boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!--link de la biblioteca de iconos de Boostrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!--Mi CSS-->
-    <link rel="stylesheet" href="./buscar-pokemons.css">
 </head>
 <body>
     <header>
@@ -36,13 +34,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="../pagina-busqueda-pokemons/buscar-pokemons.html">
+                                <a class="nav-link" aria-current="page" href="../pagina-busqueda-pokemons/buscar-pokemons.html">
                                     Buscar pokemons
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    OtraSección
+                                <a class="nav-link active" href="../pagina-busqueda-cartas/buscar-cartas.html">
+                                    Buscar cartas
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -57,78 +55,22 @@
             </div>
         </nav>
 
-        <h1>Pokedex</h1>
+        <h1>Buscar cartas</h1>
     </header>
 
     <main>
-        <div id="app">
-            <section id="busqueda-pokemons">
-                <h2>Buscar Pokemons</h2>
+        <section id="busqueda">
+            <input type="text" id="input-cartas" placeholder="ingrese un pokemon">
 
-                <label for="nombre-pokemon" class="visually-hidden"> buscar pokemones: </label>
-                <input v-model="textoDeBusqueda" id="nombre-pokemon" placeholder="ej: bulbasaur">
+            <div class="container ">
+                <ul id="lista-cartas" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
 
-                <p v-if="cargandoDatosIniciales" class="fs-1"> Cargando datos... </p>
-                <p v-else-if="errorDatosIniciales !== null" class="fs-1"> Hubo un error al obtener los datos </p>
-                <template v-else>
-                    <label for="tipos-pokemons" class="visually-hidden"> buscar pokemones: </label>
-                    <select id="tipos-pokemons" v-model="tipoDePokemonSeleccionado">
-                        <option value="Todos" selected>Todos</option>
-                        <option v-for="tipo in tiposDePokemons" :value="tipo" :key="tipo">
-                            {{tipo}}
-                        </option>
-                    </select>
-
-                    <p>cantidad de pokemons encontrados: {{ contadorPokemons }}</p>
-                    
-                    <div class="container">
-                        <ul @click="verDetallesDelPokemon" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 list-unstyled g-3">
-                            <li v-for="pokemon in pokemonsFiltrados" :key="pokemon.id" :id="pokemon.id" class="col">
-                                <div class="card h-100">
-                                    <img :src="pokemon.urlImagen" class="card-img-top" :alt="pokemon.nombre">
-
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{pokemon.nombre}}</h5>
-                                        <h6>tipos: </h6>
-                                        <ul>
-                                            <li v-for="tipo in pokemon.tipos">
-                                                {{tipo}}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-
-                    <p v-if="cargandoObtenerMasPokemons" class="fs-1"> Cargando más pokemones... </p>
-                    <p v-else-if="errorObtenerMasPokemons !== null" class="fs-1"> 
-                        Hubo un error al intentar cargar más pokemons 
-                    </p>
-                    
-                    <button @click="cargarMasPokemons" :obtenerCantidadesDeTiposDePokemons="obtenerCantidadesDeTiposDePokemons">
-                        Ver más pokemones
-                    </button>
-
-                    <componente-grafico :pokemons="pokemonsFiltrados">
-                        <!--Generar graficos dinamicamente con Vue-->
-                    </componente-grafico>
-
-                    <componente-estadistica
-                    :pokemons='pokemonsFiltrados'
-                    :obtener-cantidades-de-tipos-de-pokemons='obtenerCantidadesDeTiposDePokemons'>
-                        <!--Generar estadisticas dinamicamente con Vue-->
-                    </componente-estadistica>
-
-                </template>
-            </section>
-        </div>
+                </ul>
+            </div>
+        </section>
     </main>
 
-    <!-- 
-    2. Footer con redes sociales
-    -->
+    
     <footer>
         <ul>
             <li>
@@ -146,12 +88,10 @@
             </li>
         </ul>
     </footer>
-
+    
     <!--script del JS de Boostrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!--script de mi JS-->
-    <script type="module" src="/src/components/pages/pagina-busqueda-pokemons/busqueda-pokemons.js"></script>
-    <!--CDN de Echarts-->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js"></script>
+    <script type="module" src="/src/components/pages/pagina-busqueda-cartas/principal.js"></script>
 </body>
 </html>

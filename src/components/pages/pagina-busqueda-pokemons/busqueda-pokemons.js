@@ -1,13 +1,11 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import {Pokemon} from '/src/models/objPokemon.js'
-import {obtenerPokemons, obtenerTiposDePokemons} from '/src/services/api.js'
-import componenteModal from './componente-modal.js'
+import {obtenerPokemons, obtenerTiposDePokemons} from '/src/services/pokeApi.js'
 import componenteGrafico from './componente-grafico.js'
 import componenteEstadistica from './componente-estadistica.js'
 
 const appBusquedaPokemons = createApp({
     components:{
-        componenteModal,
         componenteGrafico,
         componenteEstadistica
     },
@@ -17,6 +15,7 @@ const appBusquedaPokemons = createApp({
             //estructuras de datos
             pokemons: [],
             tiposDePokemons: [],
+
             //inputs
             textoDeBusqueda: '',
             tipoDePokemonSeleccionado: 'Todos',
@@ -128,7 +127,7 @@ const appBusquedaPokemons = createApp({
             });
 
             return TiposPokemons;
-        }
+        },
     },
 
     created(){

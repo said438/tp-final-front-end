@@ -2,6 +2,7 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import {Pokemon} from "/src/models/objPokemon.js"
 import {mostrarMensajeErrorApi} from "/src/utils/excepciones.js";
+import {consultarAPI} from "/src/utils/api.js"
 
 const URL_BASE = 'https://pokeapi.co/api/v2';
 
@@ -95,15 +96,4 @@ export async function obtenerPokemonsPopulares(){
 
     const pokemonsPopulares = Promise.all(promesas);
     return pokemonsPopulares;
-}
-
-//función auxiliar
-export async function consultarAPI(url){
-    try{
-        const respuesta = await fetch(url);
-        return respuesta.json();
-    }catch(ex){
-        console.log(`Ocurrio un error al obtener datos de la API: ${ex}`);
-        throw ex;
-    }
 }
